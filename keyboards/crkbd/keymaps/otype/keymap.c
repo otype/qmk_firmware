@@ -59,11 +59,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [3] = LAYOUT_split_3x6_3(
   //,-------------+-------------+-------------+-------------+-------------+-------------.                               ,--------------+-------------+-------------+-------------+-------------+-------------.
-      UG_NEXT,      KC_F1,        KC_F2,        KC_F3,        KC_F4,        KC_KB_VOLUME_UP,                              LCTL(KC_PMNS), XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
+      UG_NEXT,      KC_F1,        KC_F2,        KC_F3,        KC_F4,        KC_VOLU,                                      LCTL(KC_PMNS), XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
   //|-------------+-------------+-------------+-------------+-------------+-------------|                               |--------------+-------------+-------------+-------------+-------------+-------------|
-      UG_PREV,      KC_F5,        KC_F6,        KC_F7,        KC_F8,        KC_KB_VOLUME_DOWN,                            LCTL(KC_PPLS), XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
+      UG_PREV,      KC_F5,        KC_F6,        KC_F7,        KC_F8,        KC_VOLD,                                      LCTL(KC_PPLS), XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
   //|-------------+-------------+-------------+-------------+-------------+-------------|                               |--------------+-------------+-------------+-------------+-------------+-------------|
-      UG_TOGG,      KC_F9,        KC_F10,       KC_F11,       KC_F12,       KC_KB_MUTE,                                   LCTL(KC_0),    XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
+      UG_TOGG,      KC_F9,        KC_F10,       KC_F11,       KC_F12,       KC_MUTE,                                      LCTL(KC_0),    XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
   //|-------------+-------------+-------------+-------------+-------------+-------------+-------------|  |--------------+--------------+-------------+-------------+-------------+-------------+-------------|
                                                               _______,      XXXXXXX,      XXXXXXX,         KC_MPLY,       KC_MPRV,       KC_MNXT
                                                           //`-------------+-------------+-------------'  `--------------+--------------+-------------'
