@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define OLED_DISPLAY_128x32
 #define OLED_BRIGHTNESS 128
-#define OLED_TIMEOUT 10000 // = 10.000ms = 10s
+#define OLED_TIMEOUT 5000 // = 5000ms = 5s
 
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_EFFECT_BREATHING
