@@ -1,3 +1,3 @@
 DEFAULT_FOLDER = crkbd/rev1
 TRI_LAYER_ENABLE = yes
-OLED_ENABLE = yespbh
+OLED_ENABLE = yes
