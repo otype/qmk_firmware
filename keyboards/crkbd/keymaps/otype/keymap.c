@@ -19,6 +19,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
+enum layer_names {
+  _MAC_BASE,
+  _MAC_NUM,
+  _MAC_NAV,
+  _MAC_CODE,
+  _MAC_DEV
+};
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_split_3x6_3(
   //,-------------+-------------+-------------+-------------+-------------+-------------.                               ,--------------+-------------+-------------+-------------+-------------+-------------.
@@ -83,3 +92,49 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   )
 };
+
+#ifdef OLED_ENABLE
+bool oled_task_user() {
+  oled_set_cursor(0, 1);
+
+  switch (get_highest_layer(layer_state)) {
+  case _MAC_BASE:
+    oled_write_ln_P(PSTR("LAYER> Base"), false);
+    break;
+  case _MAC_NUM:
+    oled_write_ln_P(PSTR("LAYER> Nums & Syms"), false);
+    break;
+  case _MAC_NAV:
+    oled_write_ln_P(PSTR("LAYER> Navigation"), false);
+    break;
+  case _MAC_CODE:
+    oled_write_ln_P(PSTR("LAYER> Code"), false);
+    break;
+  case _MAC_DEV:
+    oled_write_ln_P(PSTR("LAYER> IDE/Dev"), false);
+    break;
+  }
+
+  return false;
+}
+
+void oled_render_boot(bool bootloader) {
+  oled_clear();
+
+  oled_set_cursor(0, 1);
+  if (bootloader) {
+    oled_write_P(PSTR(">>> Flashing firmware"), false);
+  } else {
+    oled_write_P(PSTR(">>> Rebooting ..."), false);
+  }
+
+  oled_render_dirty(true);
+}
+
+bool shutdown_user(bool jump_to_bootloader) {
+  oled_render_boot(jump_to_bootloader);
+
+  return false;
+}
+
+#endif
