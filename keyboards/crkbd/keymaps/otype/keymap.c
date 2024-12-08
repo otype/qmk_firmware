@@ -20,16 +20,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 
 enum layer_names {
-  _MAC_BASE,
-  _MAC_NUM,
-  _MAC_NAV,
-  _MAC_CODE,
-  _MAC_DEV
+  _BASE,
+  _NUM,
+  _NAV,
+  _CODE,
+  _DEV
 };
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = LAYOUT_split_3x6_3(
+    [_BASE] = LAYOUT_split_3x6_3(
   //,-------------+-------------+-------------+-------------+-------------+-------------.                               ,--------------+-------------+-------------+-------------+-------------+-------------.
       KC_TAB,       KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,                                         KC_Y,          KC_U,         KC_I,         KC_O,         KC_P,         KC_MINS,
   //|-------------+-------------+-------------+-------------+-------------+-------------|                               |--------------+-------------+-------------+-------------+-------------+-------------|
@@ -98,19 +98,19 @@ bool oled_task_user() {
   oled_set_cursor(0, 1);
 
   switch (get_highest_layer(layer_state)) {
-  case _MAC_BASE:
+  case _BASE:
     oled_write_ln_P(PSTR("LAYER> Base"), false);
     break;
-  case _MAC_NUM:
+  case _NUM:
     oled_write_ln_P(PSTR("LAYER> Nums & Syms"), false);
     break;
-  case _MAC_NAV:
+  case _NAV:
     oled_write_ln_P(PSTR("LAYER> Navigation"), false);
     break;
-  case _MAC_CODE:
+  case _CODE:
     oled_write_ln_P(PSTR("LAYER> Code"), false);
     break;
-  case _MAC_DEV:
+  case _DEV:
     oled_write_ln_P(PSTR("LAYER> IDE/Dev"), false);
     break;
   }
