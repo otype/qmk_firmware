@@ -9,7 +9,7 @@
         "bootmagic": true,
         "extrakey": true,
         "nkro": true,
-
+        "oled": true,
         "rgblight": false,
         "rgb_matrix": true
     },
