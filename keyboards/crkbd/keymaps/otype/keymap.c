@@ -18,6 +18,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
+
+/*
+const key_override_t dot_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_QUES);  // Shift . is ?
+const key_override_t comm_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_EXLM); // Shift , is !
+const key_override_t mins_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_MINS, KC_EQL);  // Shift - is =
+const key_override_t coln_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_SCLN); // Shift : is ;
+*/
+
+const key_override_t* key_overrides[] = {
+    /* &dot_key_override, */
+    /* &comm_key_override, */
+    /* &mins_key_override, */
+    /* &coln_key_override, */
+};
+
+
 enum layer_names {
   _BASE,
   _NUM,
