@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #include QMK_KEYBOARD_H
+/* #include <time.h> */
 
 
 /*
@@ -83,9 +84,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_CODE] = LAYOUT_split_3x6_3(
   //,-------------+-------------+-------------+-------------+-------------+-------------.                               ,--------------+-------------+-------------+-------------+-------------+-------------.
-      UG_NEXT,      KC_F1,        KC_F2,        KC_F3,        KC_F4,        KC_VOLU,                                      LCTL(KC_PMNS), XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
+      UG_NEXT,      KC_F1,        KC_F2,        KC_F3,        KC_F4,        KC_VOLU,                                      LCTL(KC_PLUS), XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
   //|-------------+-------------+-------------+-------------+-------------+-------------|                               |--------------+-------------+-------------+-------------+-------------+-------------|
-      UG_TOGG,      KC_F5,        KC_F6,        KC_F7,        KC_F8,        KC_VOLD,                                      LCTL(KC_PPLS), XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
+      UG_TOGG,      KC_F5,        KC_F6,        KC_F7,        KC_F8,        KC_VOLD,                                      LCTL(KC_MINS), XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
   //|-------------+-------------+-------------+-------------+-------------+-------------|                               |--------------+-------------+-------------+-------------+-------------+-------------|
       QK_BOOT,      KC_F9,        KC_F10,       KC_F11,       KC_F12,       KC_MUTE,                                      LCTL(KC_0),    XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
   //|-------------+-------------+-------------+-------------+-------------+-------------+-------------|  |--------------+--------------+-------------+-------------+-------------+-------------+-------------|
@@ -110,6 +111,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef OLED_ENABLE
 static void render_status(void) {
+  /* time_t t = time(NULL); */
+  /* struct tm *tm = localtime(&t); */
+
   oled_set_cursor(0, 1);
 
   switch (get_highest_layer(layer_state)) {
@@ -129,6 +133,8 @@ static void render_status(void) {
     oled_write_ln_P(PSTR("LAYER: IDE/Dev"), false);
     break;
   }
+
+  /* oled_write(asctime(tm), false); */
 }
 
 static void render_logo(void) {
