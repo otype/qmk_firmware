@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define USE_MATRIX_I2C
 
 //#define QUICK_TAP_TERM 0
-#define TAPPING_TERM 300 // how long before a key press becomes a hold
+#define TAPPING_TERM 250 // how long before a key press becomes a hold
 
 #define OLED_DISPLAY_128x32
 #define OLED_BRIGHTNESS 128
