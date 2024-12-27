@@ -17,30 +17,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #include QMK_KEYBOARD_H
-/* #include <time.h> */
 
-
-/*
-const key_override_t dot_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_QUES);  // Shift . is ?
-const key_override_t comm_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_EXLM); // Shift , is !
-const key_override_t mins_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_MINS, KC_EQL);  // Shift - is =
-const key_override_t coln_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_SCLN); // Shift : is ;
-*/
+/* const key_override_t quot_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_QUOT, KC_UNDS);  // Shift ' is _ */
+/* const key_override_t comm_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_QUES);  // Shift , is ? */
+/* const key_override_t slash_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_SLSH, KC_LT);    // Shift / is < */
+/* const key_override_t dot_key_override   = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_GT);     // Shift . is > */
+/* const key_override_t mins_key_override   = ko_make_basic(MOD_MASK_SHIFT, KC_MINS, KC_DQT);  // Shift - is " */
 
 const key_override_t* key_overrides[] = {
-    /* &dot_key_override, */
+    /* &quot_key_override, */
     /* &comm_key_override, */
+    /* &slash_key_override, */
+    /* &dot_key_override, */
     /* &mins_key_override, */
-    /* &coln_key_override, */
 };
-
 
 enum layer_names {
   _BASE,
+  _GRAPHITE,
   _NUM,
   _NAV,
   _CODE,
-  _DEV
+  _DEV,
 };
 
 
@@ -56,6 +54,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                               MO(_CODE),    MO(_NUM),     KC_ENT,          KC_BSPC,       KC_SPC,        MO(_NAV)
                                                           //`-------------+-------------+-------------'  `--------------+--------------+-------------'
   ),
+
+    [_GRAPHITE] = LAYOUT_split_3x6_3(
+  //,-------------+-------------+-------------+-------------+-------------+-------------.                               ,--------------+-------------+-------------+-------------+-------------+-------------.
+      KC_TAB,       KC_B,         KC_L,         KC_D,         KC_W,         KC_Z,                                         KC_QUOT,       KC_F,         KC_O,         KC_U,         KC_J,         KC_MINS,
+  //|-------------+-------------+-------------+-------------+-------------+-------------|                               |--------------+-------------+-------------+-------------+-------------+-------------|
+      KC_LCTL,      LGUI_T(KC_N), LALT_T(KC_R), LSFT_T(KC_T), LCTL_T(KC_S), KC_G,                                         KC_Y,          RCTL_T(KC_H), RSFT_T(KC_A), LALT_T(KC_E), LGUI_T(KC_I), KC_COMM,
+  //|-------------+-------------+-------------+-------------+-------------+-------------|                               |--------------+-------------+-------------+-------------+-------------+-------------|
+      KC_LSFT,      KC_Q,         KC_X,         KC_M,         KC_C,         KC_V,                                         KC_K,          KC_P,         KC_DOT,       KC_MINS,      KC_SLSH,      KC_RSFT,
+  //|-------------+-------------+-------------+-------------+-------------+-------------+-------------|  |--------------+--------------+-------------+-------------+-------------+-------------+-------------|
+                                                              MO(_CODE),    MO(_NUM),     KC_ENT,          KC_BSPC,       KC_SPC,        MO(_NAV)
+                                                          //`-------------+-------------+-------------'  `--------------+--------------+-------------'
+  ),
+
 
     [_NUM] = LAYOUT_split_3x6_3(
   //,-------------+-------------+-------------+-------------+-------------+-------------.                               ,--------------+-------------+-------------+-------------+-------------+-------------.
@@ -97,9 +108,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_DEV] = LAYOUT_split_3x6_3(
   //,-------------+-------------+-------------+-------------+-------------+-------------.                               ,--------------+-------------+-------------+-------------+-------------+-------------.
-      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      LSFT(KC_F6),  LALT(KC_F12),                                 XXXXXXX,       XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
+      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      LSFT(KC_F6),  LALT(KC_F12),                                 DF(_GRAPHITE), XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
   //|-------------+-------------+-------------+-------------+-------------+-------------|                               |--------------+-------------+-------------+-------------+-------------+-------------|
-      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      LALT(KC_INS),                                 XXXXXXX,       XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      _______,
+      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      LALT(KC_INS),                                 DF(_BASE),     XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      _______,
   //|-------------+-------------+-------------+-------------+-------------+-------------|                               |--------------+-------------+-------------+-------------+-------------+-------------|
       XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,                                      XXXXXXX,       XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
   //|-------------+-------------+-------------+-------------+-------------+-------------+-------------|  |--------------+--------------+-------------+-------------+-------------+-------------+-------------|
@@ -111,9 +122,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef OLED_ENABLE
 static void render_status(void) {
-  /* time_t t = time(NULL); */
-  /* struct tm *tm = localtime(&t); */
-
   oled_set_cursor(0, 1);
 
   switch (get_highest_layer(layer_state)) {
@@ -132,9 +140,10 @@ static void render_status(void) {
   case _DEV:
     oled_write_ln_P(PSTR("LAYER: IDE/Dev"), false);
     break;
+  case _GRAPHITE:
+    oled_write_ln_P(PSTR("LAYER: Graphite"), false);
+    break;
   }
-
-  /* oled_write(asctime(tm), false); */
 }
 
 static void render_logo(void) {
