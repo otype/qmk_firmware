@@ -18,20 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
-/* const key_override_t quot_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_QUOT, KC_UNDS);  // Shift ' is _ */
-/* const key_override_t comm_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_QUES);  // Shift , is ? */
-/* const key_override_t slash_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_SLSH, KC_LT);    // Shift / is < */
-/* const key_override_t dot_key_override   = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_GT);     // Shift . is > */
-/* const key_override_t mins_key_override   = ko_make_basic(MOD_MASK_SHIFT, KC_MINS, KC_DQT);  // Shift - is " */
-
-const key_override_t* key_overrides[] = {
-    /* &quot_key_override, */
-    /* &comm_key_override, */
-    /* &slash_key_override, */
-    /* &dot_key_override, */
-    /* &mins_key_override, */
-};
-
 enum layer_names {
   _BASE,
   _GRAPHITE,
@@ -41,6 +27,21 @@ enum layer_names {
   _DEV,
 };
 
+const key_override_t quot_key_override  = ko_make_with_layers(MOD_MASK_SHIFT, KC_QUOT, KC_UNDS, ~_GRAPHITE);   // Shift ' is _
+const key_override_t comm_key_override   = ko_make_with_layers(MOD_MASK_SHIFT, KC_COMM, KC_QUES, ~_GRAPHITE);  // Shift , is ?
+const key_override_t slash_key_override  = ko_make_with_layers(MOD_MASK_SHIFT, KC_SLSH, KC_LT, ~_GRAPHITE);    // Shift / is <
+const key_override_t dot_key_override    = ko_make_with_layers(MOD_MASK_SHIFT, KC_DOT, KC_GT, ~_GRAPHITE);     // Shift . is >
+const key_override_t mins_key_override   = ko_make_with_layers(MOD_MASK_SHIFT, KC_MINS, KC_DQT, ~_GRAPHITE);   // Shift - is "
+const key_override_t scolon_key_override = ko_make_with_layers(MOD_MASK_SHIFT, KC_SCLN, KC_COLN, ~_GRAPHITE);  // Shift ; is :
+
+const key_override_t* key_overrides[] = {
+    &quot_key_override,
+    &comm_key_override,
+    &slash_key_override,
+    &dot_key_override,
+    &mins_key_override,
+    &scolon_key_override,
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_split_3x6_3(
@@ -57,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_GRAPHITE] = LAYOUT_split_3x6_3(
   //,-------------+-------------+-------------+-------------+-------------+-------------.                               ,--------------+-------------+-------------+-------------+-------------+-------------.
-      KC_TAB,       KC_B,         KC_L,         KC_D,         KC_W,         KC_Z,                                         KC_QUOT,       KC_F,         KC_O,         KC_U,         KC_J,         KC_MINS,
+      KC_TAB,       KC_B,         KC_L,         KC_D,         KC_W,         KC_Z,                                         KC_QUOT,       KC_F,         KC_O,         KC_U,         KC_J,         KC_SCLN,
   //|-------------+-------------+-------------+-------------+-------------+-------------|                               |--------------+-------------+-------------+-------------+-------------+-------------|
       KC_LCTL,      LGUI_T(KC_N), LALT_T(KC_R), LSFT_T(KC_T), LCTL_T(KC_S), KC_G,                                         KC_Y,          RCTL_T(KC_H), RSFT_T(KC_A), LALT_T(KC_E), LGUI_T(KC_I), KC_COMM,
   //|-------------+-------------+-------------+-------------+-------------+-------------|                               |--------------+-------------+-------------+-------------+-------------+-------------|
@@ -119,6 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   )
 };
+
 
 #ifdef OLED_ENABLE
 static void render_status(void) {
