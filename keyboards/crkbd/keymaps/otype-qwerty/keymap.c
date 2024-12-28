@@ -27,7 +27,7 @@ enum layer_names {
   _DEV,
 };
 
-const key_override_t quot_key_override  = ko_make_with_layers(MOD_MASK_SHIFT, KC_QUOT, KC_UNDS, ~_GRAPHITE);   // Shift ' is _
+const key_override_t quot_key_override   = ko_make_with_layers(MOD_MASK_SHIFT, KC_QUOT, KC_UNDS, ~_GRAPHITE);  // Shift ' is _
 const key_override_t comm_key_override   = ko_make_with_layers(MOD_MASK_SHIFT, KC_COMM, KC_QUES, ~_GRAPHITE);  // Shift , is ?
 const key_override_t slash_key_override  = ko_make_with_layers(MOD_MASK_SHIFT, KC_SLSH, KC_LT, ~_GRAPHITE);    // Shift / is <
 const key_override_t dot_key_override    = ko_make_with_layers(MOD_MASK_SHIFT, KC_DOT, KC_GT, ~_GRAPHITE);     // Shift . is >
@@ -130,6 +130,9 @@ static void render_status(void) {
   case _BASE:
     oled_write_ln_P(PSTR("LAYER: Base"), false);
     break;
+  case _GRAPHITE:
+    oled_write_ln_P(PSTR("LAYER: Graphite"), false);
+    break;
   case _NUM:
     oled_write_ln_P(PSTR("LAYER: Nums & Syms"), false);
     break;
@@ -141,9 +144,6 @@ static void render_status(void) {
     break;
   case _DEV:
     oled_write_ln_P(PSTR("LAYER: IDE/Dev"), false);
-    break;
-  case _GRAPHITE:
-    oled_write_ln_P(PSTR("LAYER: Graphite"), false);
     break;
   }
 }
